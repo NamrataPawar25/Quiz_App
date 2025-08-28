@@ -1,12 +1,14 @@
 // src/components/Quiz.js
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { questions } from "../data";
 import QuestionCard from "./QuestionCard";
 
 const Quiz = () => {
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState({}); // <-- store user answers
+  const location= useLocation();
+  const { name } = location.state || { name: "Guest" };
   const navigate = useNavigate();
 
   // Save selected answer
@@ -37,11 +39,12 @@ const Quiz = () => {
     questions.forEach((q, i) => {
       if (answers[i] === q.answer) score++;
     });
-    navigate("/result", { state: { score, total: questions.length } });
+    navigate("/result", { state: { score, total: questions.length, name } });
   };
 
   return (
     <div className="container mt-4 text-center">
+        <h2 className="mb-3">Hello, {name}! 👋</h2>
       <h1 className="mb-4">Quiz</h1>
 
       <QuestionCard

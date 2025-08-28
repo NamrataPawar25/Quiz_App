@@ -7,11 +7,12 @@ const Result = () => {
   const navigate = useNavigate();
 
   // Get score + total from Quiz.js
-  const { score, total } = location.state || { score: 0, total: 0 };
+  const { score, total, name } = location.state || { score: 0, total: 0, name: "Guest" };
 
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>Quiz Completed 🎉</h1>
+      <h1>Great Job, {name}! 🎉</h1>
       <h2>
         Your Score: {score} / {total}
       </h2>
